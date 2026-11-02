@@ -1,4 +1,7 @@
 package org.example.projetoRestaurante.cardapio;
 
-public class ItemCardapio {
+public interface ItemCardapio {
+    String getDescricao();
+    double getPreco();
+
 }

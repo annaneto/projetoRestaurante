@@ -1,6 +1,8 @@
 package org.example.projetoRestaurante.app;
 
+import org.example.projetoRestaurante.cardapio.ItemCardapio;
 import org.example.projetoRestaurante.cardapio.Lanche;
+import org.example.projetoRestaurante.cardapio.LancheFactory;
 import org.example.projetoRestaurante.pedido.Pedido;
 import java.util.Collection;
 import java.util.InputMismatchException;
@@ -51,11 +53,11 @@ public class MenuConsole {
         int opcao = lerOpcao();
         switch (opcao) {
             case 1:
-                return new Lanche("X-Burger", 16.0);
+                return LancheFactory.xBurger();
             case 2:
-                return new Lanche("X-Salada", 18.0);
+                return LancheFactory.xSalada();
             case 3:
-                return new Lanche("X-Bacon", 22.0);
+                return LancheFactory.xBacon();
             case 0:
                 return null;
             default:
@@ -79,8 +81,8 @@ public class MenuConsole {
         for (Pedido p : pedidos) {
             System.out.println("Pedido #" + p.getId() + " - Cliente: " + p.getNomeCliente());
             System.out.println("Itens:");
-            for (Lanche item : p.getItens()) {
-                System.out.println("  - " + item.getNome() + " (R$ " + String.format("%.2f", item.getPreco()) + ")");
+            for (ItemCardapio item : p.getItens()) {
+                System.out.println("  - " + item.getDescricao() + " (R$ " + String.format("%.2f", item.getPreco()) + ")");
             }
             System.out.println("Total do pedido: R$ " + String.format("%.2f", p.calcularTotal()));
             System.out.println("--------------------------");

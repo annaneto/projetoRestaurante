@@ -1,6 +1,7 @@
 package org.example.projetoRestaurante.app;
 
-import org.example.projetoRestaurante.cardapio.Lanche;
+import org.example.projetoRestaurante.cardapio.ItemCardapio;
+import org.example.projetoRestaurante.cardapio.LancheFactory;
 import org.example.projetoRestaurante.pedido.GerenciadorPedidos;
 import org.example.projetoRestaurante.pedido.Pedido;
 
@@ -15,10 +16,10 @@ public class RestauranteFacade {
     public Pedido buscarPedido(int id){
         return gerenciador.consultarPedido(id);
     }
-    public void adcionarItemPedido(int id, Lanche lanche){
+    public void adicionarItemPedido(int id, ItemCardapio item) {
         Pedido pedido = gerenciador.consultarPedido(id);
-        if(pedido != null){
-            pedido.adicionarLanche(lanche);
+        if (pedido != null) {
+            pedido.adicionarItem(item);
         }
     }
     public ArrayList<Pedido> getPedidos(){
@@ -27,4 +28,30 @@ public class RestauranteFacade {
     public double calcularTotalDoDia() {
         return gerenciador.calcularTotalDia();
     }
+
+    // metodos para adicionar opcao de lanche
+
+    public void adicionarXBurgerAoPedido(int idPedido) {
+        Pedido p = gerenciador.consultarPedido(idPedido);
+        if (p != null) {
+            p.adicionarItem(LancheFactory.xBurger());
+        }
+    }
+
+    public void adicionarXSaladaAoPedido(int idPedido) {
+        Pedido p = gerenciador.consultarPedido(idPedido);
+        if (p != null) {
+            p.adicionarItem(LancheFactory.xSalada());
+        }
+    }
+
+    public void adicionarXBaconAoPedido(int idPedido) {
+        Pedido p = gerenciador.consultarPedido(idPedido);
+        if (p != null) {
+            p.adicionarItem(LancheFactory.xBacon());
+        }
+    }
+
+
+
 }

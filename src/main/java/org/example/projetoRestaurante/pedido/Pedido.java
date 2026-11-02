@@ -1,5 +1,6 @@
 package org.example.projetoRestaurante.pedido;
 
+import org.example.projetoRestaurante.cardapio.ItemCardapio;
 import org.example.projetoRestaurante.cardapio.Lanche;
 
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 public class Pedido {
     private int id;
     private String nomeCliente;
-    ArrayList<Lanche> listaLanches = new ArrayList<>();
+    private ArrayList<ItemCardapio> itens = new ArrayList<>();
 
     public Pedido(int id, String nome){
         setId(id);
@@ -33,18 +34,20 @@ public class Pedido {
     }
 
 
-    public void adicionarLanche(Lanche lanche){
-        listaLanches.add(lanche);
+    public void adicionarItem(ItemCardapio item) {
+        if (item != null) {
+            itens.add(item);
+        }
     }
 
-    public ArrayList<Lanche> getItens(){
-        return listaLanches;
+    public ArrayList<ItemCardapio> getItens(){
+        return itens;
     }
 
     public double calcularTotal(){
         double valorTotal = 0;
-        for(Lanche lanche : listaLanches){
-            valorTotal += lanche.getPreco();
+        for(ItemCardapio item : itens){
+            valorTotal += item.getPreco();
         }
         return valorTotal;
     }
