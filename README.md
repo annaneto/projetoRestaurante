@@ -33,20 +33,8 @@ responsabilidades bem divididas entre as classes e pacotes:
 
 ---
 
-## Testes
-
-Os testes unitários foram feitos com **JUnit 5** em `src/test/java`, validando pontos como:
-
-1. Tentativa de cadastrar lanche com preço negativo (esperando `IllegalArgumentException`).
-2. Cálculo de preço de um lanche com adicional (`ComCheddar`), usando margem de tolerância para comparações de `double`.
-
-Para rodar os testes pelo terminal:
-
-```bash
-mvn test
-```
-
----
 
 ## Link do Vídeo de Apresentação
+
+https://youtu.be/Jueuw4yPYgk
 
