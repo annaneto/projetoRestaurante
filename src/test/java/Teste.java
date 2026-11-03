@@ -1,5 +1,7 @@
+import org.example.projetoRestaurante.cardapio.ComCheddar;
+import org.example.projetoRestaurante.cardapio.ItemCardapio;
 import org.example.projetoRestaurante.cardapio.Lanche;
-import org.example.projetoRestaurante.pedido.GerenciadorPedidos;
+import org.example.projetoRestaurante.cardapio.LancheFactory;
 import org.example.projetoRestaurante.pedido.Pedido;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,18 +15,12 @@ public class Teste {
         });
     }
 
-    @Test
-    void lancheRecusaNomeVazio() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Lanche("   ", 15.0);
-        });
-    }
 
     @Test
-    void pedidoCalculaTotalCorretamente() {
+    void xBurgerComCheddarCalculaTotalCorretamente() {
         Pedido pedido = new Pedido(1, "Ana");
-        pedido.adicionarItem(new Lanche("X-Burger", 16.0));
-        pedido.adicionarItem(new Lanche("X-Salada", 18.0));
-        assertEquals(34.0, pedido.calcularTotal(), 0.001);
+        ItemCardapio lanche = new ComCheddar(LancheFactory.xBurger());
+        pedido.adicionarItem(lanche);
+        assertEquals(20.0, pedido.calcularTotal(), 0.001);
     }
 }

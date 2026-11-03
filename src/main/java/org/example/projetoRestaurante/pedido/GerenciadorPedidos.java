@@ -48,7 +48,7 @@ public class GerenciadorPedidos {
 
     // Item 3.3
     public HashSet<String> obterCombinacoesUnicas() {
-        HashSet<String> combinacoes = new HashSet<>();
+        HashSet<String> combinacoes = new HashSet<>(); // elementos que nao podem ser repetidos
         for (Pedido p : pedidos.values()) {
             for (ItemCardapio item : p.getItens()) {
                 combinacoes.add(item.getDescricao());

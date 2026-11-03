@@ -17,19 +17,11 @@ public class RestauranteFacade {
         return gerenciador.buscarPedido(id);
     }
 
-    public Pedido consultarPedido(int id) {
-        return gerenciador.consultarPedido(id);
-    }
-
     public void adicionarItemAoPedido(int id, ItemCardapio item) {
         Pedido pedido = gerenciador.buscarPedido(id);
         if (pedido != null) {
             pedido.adicionarItem(item);
         }
-    }
-
-    public void adicionarItemPedido(int id, ItemCardapio item) {
-        adicionarItemAoPedido(id, item);
     }
 
     public boolean removerItemDoPedido(int id, int indiceItem) {
