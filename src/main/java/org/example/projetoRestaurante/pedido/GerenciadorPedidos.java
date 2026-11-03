@@ -1,40 +1,52 @@
 package org.example.projetoRestaurante.pedido;
 
 import org.example.projetoRestaurante.cardapio.ItemCardapio;
-
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 
 public class GerenciadorPedidos {
-
     private HashMap<Integer, Pedido> pedidos = new HashMap<>();
     private int contadorPedidos = 1;
 
-    public Pedido criarPedido(String nomeCliente){
+    public Pedido criarPedido(String nomeCliente) {
         Pedido novoPedido = new Pedido(contadorPedidos, nomeCliente);
-        pedidos.put(contadorPedidos, novoPedido);
+        pedidos.put(novoPedido.getId(), novoPedido);
         contadorPedidos++;
         return novoPedido;
     }
-    public ArrayList<Pedido> getPedidos() {
-        return new ArrayList<>(pedidos.values());
+
+    public Pedido buscarPedido(int id) {
+        return pedidos.get(id);
     }
 
-    public double calcularTotalDia(){
-        double totalDia = 0;
+    public Pedido consultarPedido(int id) {
+        return pedidos.get(id);
+    }
 
-        for(Pedido p : pedidos.values()){
-            totalDia += p.calcularTotal();
+
+    public boolean cancelarPedido(int id) {
+        return pedidos.remove(id) != null;
+    }
+
+    public Collection<Pedido> getPedidos() {
+        return pedidos.values();
+    }
+
+    public double calcularTotalDoDia() {
+        double total = 0.0;
+        for (Pedido p : pedidos.values()) {
+            total += p.calcularTotal();
         }
-        return totalDia;
+        return total;
     }
 
-    public Pedido consultarPedido(int idPedido){
-        return pedidos.get(idPedido);
+    public double calcularTotalDia() {
+        return calcularTotalDoDia();
     }
 
+    // Item 3.3
     public HashSet<String> obterCombinacoesUnicas() {
         HashSet<String> combinacoes = new HashSet<>();
         for (Pedido p : pedidos.values()) {
@@ -44,6 +56,4 @@ public class GerenciadorPedidos {
         }
         return combinacoes;
     }
-
-
 }

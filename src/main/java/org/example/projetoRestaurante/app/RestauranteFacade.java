@@ -1,57 +1,58 @@
 package org.example.projetoRestaurante.app;
 
 import org.example.projetoRestaurante.cardapio.ItemCardapio;
-import org.example.projetoRestaurante.cardapio.LancheFactory;
 import org.example.projetoRestaurante.pedido.GerenciadorPedidos;
 import org.example.projetoRestaurante.pedido.Pedido;
-
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 
 public class RestauranteFacade {
     private GerenciadorPedidos gerenciador = new GerenciadorPedidos();
 
-    public Pedido criarPedido(String nomeCliente){
-       return gerenciador.criarPedido(nomeCliente);
+    public Pedido criarPedido(String nomeCliente) {
+        return gerenciador.criarPedido(nomeCliente);
     }
-    public Pedido buscarPedido(int id){
+
+    public Pedido buscarPedido(int id) {
+        return gerenciador.buscarPedido(id);
+    }
+
+    public Pedido consultarPedido(int id) {
         return gerenciador.consultarPedido(id);
     }
-    public void adicionarItemPedido(int id, ItemCardapio item) {
-        Pedido pedido = gerenciador.consultarPedido(id);
+
+    public void adicionarItemAoPedido(int id, ItemCardapio item) {
+        Pedido pedido = gerenciador.buscarPedido(id);
         if (pedido != null) {
             pedido.adicionarItem(item);
         }
     }
-    public ArrayList<Pedido> getPedidos(){
+
+    public void adicionarItemPedido(int id, ItemCardapio item) {
+        adicionarItemAoPedido(id, item);
+    }
+
+    public boolean removerItemDoPedido(int id, int indiceItem) {
+        Pedido pedido = gerenciador.buscarPedido(id);
+        if (pedido != null) {
+            return pedido.removerItem(indiceItem);
+        }
+        return false;
+    }
+
+    public boolean cancelarPedido(int id) {
+        return gerenciador.cancelarPedido(id);
+    }
+
+    public Collection<Pedido> getPedidos() {
         return gerenciador.getPedidos();
     }
+
     public double calcularTotalDoDia() {
-        return gerenciador.calcularTotalDia();
+        return gerenciador.calcularTotalDoDia();
     }
 
-    // metodos para adicionar opcao de lanche
-
-    public void adicionarXBurgerAoPedido(int idPedido) {
-        Pedido p = gerenciador.consultarPedido(idPedido);
-        if (p != null) {
-            p.adicionarItem(LancheFactory.xBurger());
-        }
+    public HashSet<String> getCombinacoesUnicas() {
+        return gerenciador.obterCombinacoesUnicas();
     }
-
-    public void adicionarXSaladaAoPedido(int idPedido) {
-        Pedido p = gerenciador.consultarPedido(idPedido);
-        if (p != null) {
-            p.adicionarItem(LancheFactory.xSalada());
-        }
-    }
-
-    public void adicionarXBaconAoPedido(int idPedido) {
-        Pedido p = gerenciador.consultarPedido(idPedido);
-        if (p != null) {
-            p.adicionarItem(LancheFactory.xBacon());
-        }
-    }
-
-
-
 }
