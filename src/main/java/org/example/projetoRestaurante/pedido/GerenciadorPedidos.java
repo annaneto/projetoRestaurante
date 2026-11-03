@@ -1,7 +1,10 @@
 package org.example.projetoRestaurante.pedido;
 
+import org.example.projetoRestaurante.cardapio.ItemCardapio;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class GerenciadorPedidos {
@@ -30,6 +33,16 @@ public class GerenciadorPedidos {
 
     public Pedido consultarPedido(int idPedido){
         return pedidos.get(idPedido);
+    }
+
+    public HashSet<String> obterCombinacoesUnicas() {
+        HashSet<String> combinacoes = new HashSet<>();
+        for (Pedido p : pedidos.values()) {
+            for (ItemCardapio item : p.getItens()) {
+                combinacoes.add(item.getDescricao());
+            }
+        }
+        return combinacoes;
     }
 
 
